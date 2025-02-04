@@ -1,0 +1,47 @@
+EVAN ADAMSON
+Oklahoma City, Oklahoma, United States
+evan.alexander.adamson@gmail.com
+
+PROFESSIONAL SUMMARY
+Front-End Developer and Network Infrastructure Specialist with expertise in data compliance, security implementation, and
+creative technical solutions. Proven ability to develop secure applications, optimize AI model performance, and deploy
+robust network systems. Strong background in LLM evaluation, web development, and hardware networking.
+
+CORE COMPETENCIES
+- Front-End Development (React, Vite, Tailwind CSS) | - Network Infrastructure (POS Systems, Cisco Meraki, CAT6) | -
+Post-Training AI Model Evaluation | - Data Compliance & Security (PII Protection, API Security) | - Motion & Graphic Design
+| - Audio Production & Sound Engineering | - Touch Typing (103 WPM)
+
+PROFESSIONAL EXPERIENCE
+Front-End Developer & Digital Administrator
+Scroggs Fencing | Sep 2024 - Present | Oklahoma City, OK
+- - Developed and deployed a secure, high-performance landing page using React, Vite, Tailwind CSS.
+- - Implemented automated CI/CD pipelines through GitHub Actions with secure API integrations.
+- - Managed encrypted secrets and API keys using GitHub's security features.
+- - Administered LinkedIn, Meta, and Email.js platforms, ensuring security best practices.
+- - Applied data compliance protocols to safeguard digital assets and optimize workflows.
+
+AI Writing Evaluator (Tier 3)
+Outlier | Feb 2023 - Present | Austin, TX (Remote)
+- - Conducted post-training AI model evaluations for Meta, OpenAI, and confidential clients.
+- - Assessed LLM-generated content for accuracy, coherence, and ethical compliance.
+- - Reviewed AI responses, ensuring alignment with policy guidelines and responsible AI practices.
+- - Evaluated AI vision capabilities, speech-to-text reformatting, and sensitive content moderation.
+
+Network Infrastructure Technician
+Ahu Consults | Feb 2022 - Feb 2023 | Austin, TX
+- - Specialized in low-voltage electrical work for restaurant POS system upgrades.
+- - Installed and configured Toast POS systems with Cisco Meraki Z4 routers.
+- - Implemented CAT6 network cabling following ANSI/TIA/EIA-568-B standards.
+- - Ensured compliance with industry specifications for optimal network performance.
+
+CERTIFICATIONS
+- Google Cybersecurity Specialization | - FreeCodeCamp Responsive Web Design | - FreeCodeCamp Data Structures &
+Algorithms | - FreeCodeCamp Front-End Development Libraries | - FreeCodeCamp Data Visualization with D3 | - Cisco
+Computer Hardware Basics | - FreeCodeCamp Relational Databases (In Progress) | - CompTIA Security+ (In Progress)
+
+EDUCATION
+The Culinary Institute of America
+San Antonio, TX | AAS in Culinary Arts & Restaurant Management | Sep 2013 - Oct 2015
+University of Central Florida
+Orlando, FL | AA, General Studies (Focus in Graphic Design) | Jul 2007 - Dec 2010

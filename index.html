@@ -1,0 +1,1133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evan Alexander Adamson Portfolio</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="styles/windows95.css">
+    <link rel="stylesheet" href="styles/globals.css">
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/star.ico">
+</head>
+<body>
+    <div id="root"></div>
+
+    <!-- React and ReactDOM from CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <!-- Babel for JSX -->
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Your React Components -->
+    <script type="text/babel">
+        const Desktop = () => {
+            const [musicWindowOpen, setMusicWindowOpen] = React.useState(false);
+            const [resumeWindowOpen, setResumeWindowOpen] = React.useState(false);
+            const [d3WindowOpen, setD3WindowOpen] = React.useState(false);
+            const [workWindowOpen, setWorkWindowOpen] = React.useState(false);
+            const [typeTestWindowOpen, setTypeTestWindowOpen] = React.useState(false);
+            const [sleepCalcWindowOpen, setSleepCalcWindowOpen] = React.useState(false);
+            const [musicMaximized, setMusicMaximized] = React.useState(false);
+            const [resumeMaximized, setResumeMaximized] = React.useState(false);
+            const [d3Maximized, setD3Maximized] = React.useState(false);
+            const [workMaximized, setWorkMaximized] = React.useState(false);
+            const [typeTestMaximized, setTypeTestMaximized] = React.useState(false);
+            const [sleepCalcMaximized, setSleepCalcMaximized] = React.useState(false);
+            const [musicMinimized, setMusicMinimized] = React.useState(false);
+            const [resumeMinimized, setResumeMinimized] = React.useState(false);
+            const [d3Minimized, setD3Minimized] = React.useState(false);
+            const [workMinimized, setWorkMinimized] = React.useState(false);
+            const [typeTestMinimized, setTypeTestMinimized] = React.useState(false);
+            const [sleepCalcMinimized, setSleepCalcMinimized] = React.useState(false);
+            const [musicPosition, setMusicPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [resumePosition, setResumePosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [d3Position, setD3Position] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [workPosition, setWorkPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [typeTestPosition, setTypeTestPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [sleepCalcPosition, setSleepCalcPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [emailPosition, setEmailPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [musicSize, setMusicSize] = React.useState({ width: '800px', height: '600px' });
+            const [resumeSize, setResumeSize] = React.useState({ width: '800px', height: '600px' });
+            const [d3Size, setD3Size] = React.useState({ width: '800px', height: '600px' });
+            const [workSize, setWorkSize] = React.useState({ width: '800px', height: '600px' });
+            const [typeTestSize, setTypeTestSize] = React.useState({ width: '800px', height: '600px' });
+            const [sleepCalcSize, setSleepCalcSize] = React.useState({ width: '800px', height: '600px' });
+            const [draggingWindow, setDraggingWindow] = React.useState(null);
+            const [dragOffset, setDragOffset] = React.useState({ x: 0, y: 0 });
+            const [resizing, setResizing] = React.useState(null);
+            const [resizeStart, setResizeStart] = React.useState({ x: 0, y: 0, width: 0, height: 0 });
+            const [resizeType, setResizeType] = React.useState(null);
+            const [emailWindowOpen, setEmailWindowOpen] = React.useState(false);
+            const [emailMaximized, setEmailMaximized] = React.useState(false);
+            const [emailMinimized, setEmailMinimized] = React.useState(false);
+            const [emailSize, setEmailSize] = React.useState({ width: '400px', height: '300px' });
+            const [motionDesignWindowOpen, setMotionDesignWindowOpen] = React.useState(false);
+            const [motionDesignMaximized, setMotionDesignMaximized] = React.useState(false);
+            const [motionDesignMinimized, setMotionDesignMinimized] = React.useState(false);
+            const [motionDesignPosition, setMotionDesignPosition] = React.useState({ x: window.innerWidth / 2 - 400, y: window.innerHeight / 2 - 300 });
+            const [motionDesignSize, setMotionDesignSize] = React.useState({ width: '800px', height: '600px' });
+
+            const handleDragStart = (e, window) => {
+                if (window === 'music' && !musicMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('music');
+                } else if (window === 'resume' && !resumeMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('resume');
+                } else if (window === 'd3' && !d3Maximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('d3');
+                } else if (window === 'email' && !emailMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('email');
+                } else if (window === 'work' && !workMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('work');
+                } else if (window === 'typeTest' && !typeTestMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('typeTest');
+                } else if (window === 'sleepCalc' && !sleepCalcMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('sleepCalc');
+                } else if (window === 'motionDesign' && !motionDesignMaximized) {
+                    const rect = e.currentTarget.getBoundingClientRect();
+                    setDragOffset({
+                        x: e.clientX - rect.left,
+                        y: e.clientY - rect.top
+                    });
+                    setDraggingWindow('motionDesign');
+                }
+            };
+
+            const handleDrag = (e) => {
+                if (!draggingWindow) return;
+                
+                if (draggingWindow === 'music' && !musicMaximized) {
+                    setMusicPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'resume' && !resumeMaximized) {
+                    setResumePosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'd3' && !d3Maximized) {
+                    setD3Position({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'email' && !emailMaximized) {
+                    setEmailPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'work' && !workMaximized) {
+                    setWorkPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'typeTest' && !typeTestMaximized) {
+                    setTypeTestPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'sleepCalc' && !sleepCalcMaximized) {
+                    setSleepCalcPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                } else if (draggingWindow === 'motionDesign' && !motionDesignMaximized) {
+                    setMotionDesignPosition({
+                        x: e.clientX - dragOffset.x,
+                        y: e.clientY - dragOffset.y
+                    });
+                }
+            };
+
+            const handleDragEnd = () => {
+                setDraggingWindow(null);
+            };
+
+            React.useEffect(() => {
+                if (draggingWindow) {
+                    const handleMouseMove = (e) => handleDrag(e);
+                    const handleMouseUp = () => handleDragEnd();
+
+                    document.addEventListener('mousemove', handleMouseMove);
+                    document.addEventListener('mouseup', handleMouseUp);
+
+                    return () => {
+                        document.removeEventListener('mousemove', handleMouseMove);
+                        document.removeEventListener('mouseup', handleMouseUp);
+                    };
+                }
+            }, [draggingWindow]);
+
+            const handleMusicMaximize = () => {
+                setMusicMaximized(!musicMaximized);
+                if (musicMinimized) setMusicMinimized(false);
+            };
+
+            const handleResumeMaximize = () => {
+                setResumeMaximized(!resumeMaximized);
+                if (resumeMinimized) setResumeMinimized(false);
+            };
+
+            const handleMusicMinimize = () => {
+                setMusicMinimized(true);
+            };
+
+            const handleResumeMinimize = () => {
+                setResumeMinimized(true);
+            };
+
+            const handleMusicRestore = () => {
+                setMusicMinimized(false);
+            };
+
+            const handleResumeRestore = () => {
+                setResumeMinimized(false);
+            };
+
+            const handleMusicClose = () => {
+                setMusicWindowOpen(false);
+                setMusicMaximized(false);
+                setMusicMinimized(false);
+            };
+
+            const handleResumeClose = () => {
+                setResumeWindowOpen(false);
+                setResumeMaximized(false);
+                setResumeMinimized(false);
+            };
+
+            const handleEmailMaximize = () => {
+                setEmailMaximized(!emailMaximized);
+                if (emailMinimized) setEmailMinimized(false);
+            };
+
+            const handleEmailMinimize = () => {
+                setEmailMinimized(true);
+            };
+
+            const handleEmailRestore = () => {
+                setEmailMinimized(false);
+            };
+
+            const handleEmailClose = () => {
+                setEmailWindowOpen(false);
+                setEmailMaximized(false);
+                setEmailMinimized(false);
+            };
+
+            const handleD3Maximize = () => {
+                setD3Maximized(!d3Maximized);
+                if (d3Minimized) setD3Minimized(false);
+            };
+
+            const handleD3Minimize = () => {
+                setD3Minimized(true);
+            };
+
+            const handleD3Restore = () => {
+                setD3Minimized(false);
+            };
+
+            const handleD3Close = () => {
+                setD3WindowOpen(false);
+                setD3Maximized(false);
+                setD3Minimized(false);
+            };
+
+            const handleWorkMaximize = () => {
+                setWorkMaximized(!workMaximized);
+                if (workMinimized) setWorkMinimized(false);
+            };
+
+            const handleWorkMinimize = () => {
+                setWorkMinimized(true);
+            };
+
+            const handleWorkRestore = () => {
+                setWorkMinimized(false);
+            };
+
+            const handleWorkClose = () => {
+                setWorkWindowOpen(false);
+                setWorkMaximized(false);
+                setWorkMinimized(false);
+            };
+
+            const handleTypeTestMaximize = () => {
+                setTypeTestMaximized(!typeTestMaximized);
+                if (typeTestMinimized) setTypeTestMinimized(false);
+            };
+
+            const handleTypeTestMinimize = () => {
+                setTypeTestMinimized(true);
+            };
+
+            const handleTypeTestRestore = () => {
+                setTypeTestMinimized(false);
+            };
+
+            const handleTypeTestClose = () => {
+                setTypeTestWindowOpen(false);
+                setTypeTestMaximized(false);
+                setTypeTestMinimized(false);
+            };
+
+            const handleSleepCalcMaximize = () => {
+                setSleepCalcMaximized(!sleepCalcMaximized);
+                if (sleepCalcMinimized) setSleepCalcMinimized(false);
+            };
+
+            const handleSleepCalcMinimize = () => {
+                setSleepCalcMinimized(true);
+            };
+
+            const handleSleepCalcRestore = () => {
+                setSleepCalcMinimized(false);
+            };
+
+            const handleSleepCalcClose = () => {
+                setSleepCalcWindowOpen(false);
+                setSleepCalcMaximized(false);
+                setSleepCalcMinimized(false);
+            };
+
+            const handleMotionDesignMaximize = () => {
+                setMotionDesignMaximized(!motionDesignMaximized);
+                if (motionDesignMinimized) setMotionDesignMinimized(false);
+            };
+
+            const handleMotionDesignMinimize = () => {
+                setMotionDesignMinimized(true);
+            };
+
+            const handleMotionDesignRestore = () => {
+                setMotionDesignMinimized(false);
+            };
+
+            const handleMotionDesignClose = () => {
+                setMotionDesignWindowOpen(false);
+                setMotionDesignMaximized(false);
+                setMotionDesignMinimized(false);
+            };
+
+            const handleResizeStart = (e, window, type) => {
+                e.preventDefault();
+                const windowElement = e.currentTarget.parentElement;
+                const rect = windowElement.getBoundingClientRect();
+                
+                setResizeStart({
+                    x: e.clientX,
+                    y: e.clientY,
+                    width: rect.width,
+                    height: rect.height,
+                    left: rect.left,
+                    top: rect.top
+                });
+                setResizing(window);
+                setResizeType(type);
+            };
+
+            const handleResize = (e) => {
+                if (!resizing || !resizeType) return;
+
+                const deltaX = e.clientX - resizeStart.x;
+                const deltaY = e.clientY - resizeStart.y;
+                let newWidth = resizeStart.width;
+                let newHeight = resizeStart.height;
+                let newX = resizing === 'music' ? musicPosition.x : resizing === 'resume' ? resumePosition.x : resizing === 'd3' ? d3Position.x : resizing === 'work' ? workPosition.x : resizing === 'typeTest' ? typeTestPosition.x : emailPosition.x;
+                let newY = resizing === 'music' ? musicPosition.y : resizing === 'resume' ? resumePosition.y : resizing === 'd3' ? d3Position.y : resizing === 'work' ? workPosition.y : resizing === 'typeTest' ? typeTestPosition.y : emailPosition.y;
+
+                // Handle different resize types
+                if (resizeType.includes('right')) {
+                    newWidth = Math.max(200, resizeStart.width + deltaX);
+                }
+                if (resizeType.includes('left')) {
+                    const possibleWidth = Math.max(200, resizeStart.width - deltaX);
+                    if (possibleWidth !== resizeStart.width) {
+                        newWidth = possibleWidth;
+                        newX = resizeStart.left + deltaX;
+                    }
+                }
+                if (resizeType.includes('bottom')) {
+                    newHeight = Math.max(150, resizeStart.height + deltaY);
+                }
+                if (resizeType.includes('top')) {
+                    const possibleHeight = Math.max(150, resizeStart.height - deltaY);
+                    if (possibleHeight !== resizeStart.height) {
+                        newHeight = possibleHeight;
+                        newY = resizeStart.top + deltaY;
+                    }
+                }
+
+                // Update position and size
+                if (resizing === 'music') {
+                    setMusicSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setMusicPosition({ x: newX, y: newY });
+                } else if (resizing === 'resume') {
+                    setResumeSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setResumePosition({ x: newX, y: newY });
+                } else if (resizing === 'd3') {
+                    setD3Size({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setD3Position({ x: newX, y: newY });
+                } else if (resizing === 'email') {
+                    setEmailSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setEmailPosition({ x: newX, y: newY });
+                } else if (resizing === 'work') {
+                    setWorkSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setWorkPosition({ x: newX, y: newY });
+                } else if (resizing === 'typeTest') {
+                    setTypeTestSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setTypeTestPosition({ x: newX, y: newY });
+                } else if (resizing === 'sleepCalc') {
+                    setSleepCalcSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setSleepCalcPosition({ x: newX, y: newY });
+                } else if (resizing === 'motionDesign') {
+                    setMotionDesignSize({ width: `${newWidth}px`, height: `${newHeight}px` });
+                    setMotionDesignPosition({ x: newX, y: newY });
+                }
+            };
+
+            const handleResizeEnd = () => {
+                setResizing(null);
+                setResizeType(null);
+            };
+
+            React.useEffect(() => {
+                if (resizing) {
+                    const handleMouseMove = (e) => handleResize(e);
+                    const handleMouseUp = () => handleResizeEnd();
+
+                    document.addEventListener('mousemove', handleMouseMove);
+                    document.addEventListener('mouseup', handleMouseUp);
+
+                    return () => {
+                        document.removeEventListener('mousemove', handleMouseMove);
+                        document.removeEventListener('mouseup', handleMouseUp);
+                    };
+                }
+            }, [resizing, resizeType]);
+
+            return (
+                <div className="desktop-container">
+                    <div className="row g-4">
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setMusicWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/w98_keyboard_musical_midi.ico" alt="Music" className="icon-image mb-2" />
+                                    <div className="icon-label">Music.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setWorkWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/internetExplorer.ico" alt="Work" className="icon-image mb-2" />
+                                    <div className="icon-label">Clients.html</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setMotionDesignWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/folder.ico" alt="Motion Design" className="icon-image mb-2" />
+                                    <div className="icon-label">Motion Design.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setResumeWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/notepad.ico" alt="Resume" className="icon-image mb-2" />
+                                    <div className="icon-label">Resume.txt</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setD3WindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/d3.ico" alt="Data Visualization" className="icon-image mb-2" />
+                                    <div className="icon-label">d3.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setEmailWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/mail.ico" alt="Email" className="icon-image mb-2" />
+                                    <div className="icon-label">Email.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setTypeTestWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/typeTest.ico" alt="Type Test" className="icon-image mb-2" />
+                                    <div className="icon-label">Type Test.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" onClick={(e) => {
+                                e.preventDefault();
+                                setSleepCalcWindowOpen(true);
+                            }}>
+                                <div className="icon-container text-center">
+                                    <img src="images/sleepCalculator.ico" alt="Sleep Calculator" className="icon-image mb-2" />
+                                    <div className="icon-label">Sleep Calculator.exe</div>
+                                </div>
+                            </a>
+                        </div>
+                        <div className="col-6 col-sm-4 col-md-3 col-lg-2">
+                            <a className="desktop-icon" href="https://evan-alexander-adamson.github.io/Resume2025/" target="_blank" rel="noopener noreferrer">
+                                <div className="icon-container text-center">
+                                    <img src="images/internetExplorer.ico" alt="Professional Resume" className="icon-image mb-2" />
+                                    <div className="icon-label">Professional Resume Site.html</div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    {musicWindowOpen && !musicMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${musicMaximized ? 'maximized' : ''}`}
+                                style={!musicMaximized ? {
+                                    position: 'absolute',
+                                    left: musicPosition.x,
+                                    top: musicPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: musicSize.width,
+                                    height: musicSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'music')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/w98_keyboard_musical_midi.ico" alt="" className="title-icon" />
+                                        <span>Music.exe</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleMusicMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleMusicMaximize}>
+                                            {musicMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleMusicClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://evan-alexander-adamson.github.io/Moon-Raccoon/"
+                                        title="Moon Raccoon"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!musicMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'music', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'music', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'music', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'music', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'music', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'music', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'music', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'music', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {resumeWindowOpen && !resumeMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${resumeMaximized ? 'maximized' : ''}`}
+                                style={!resumeMaximized ? {
+                                    position: 'absolute',
+                                    left: resumePosition.x,
+                                    top: resumePosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: resumeSize.width,
+                                    height: resumeSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'resume')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/notepad.ico" alt="" className="title-icon" />
+                                        <span>Resume.txt</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleResumeMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleResumeMaximize}>
+                                            {resumeMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleResumeClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <div className="text-editor-toolbar">
+                                        <div className="menu-bar">
+                                            <span className="menu-item">File</span>
+                                            <span className="menu-item">Edit</span>
+                                            <span className="menu-item">View</span>
+                                            <span className="menu-item">Help</span>
+                                        </div>
+                                        <div className="toolbar-buttons">
+                                            <button className="toolbar-button">New</button>
+                                            <button className="toolbar-button">Open</button>
+                                            <button className="toolbar-button">Save</button>
+                                            <button className="toolbar-button">Print</button>
+                                            <span className="separator">|</span>
+                                            <button className="toolbar-button">Cut</button>
+                                            <button className="toolbar-button">Copy</button>
+                                            <button className="toolbar-button">Paste</button>
+                                        </div>
+                                    </div>
+                                    <div className="text-editor-content">
+                                        <pre className="resume-text">{`EVAN ADAMSON
+Oklahoma City, Oklahoma, United States
+evan.alexander.adamson@gmail.com
+
+PROFESSIONAL SUMMARY
+Front-End Developer and Network Infrastructure Specialist with expertise in data compliance, security implementation, and
+creative technical solutions. Proven ability to develop secure applications, optimize AI model performance, and deploy
+robust network systems. Strong background in LLM evaluation, web development, and hardware networking.
+
+CORE COMPETENCIES
+- Front-End Development (React, Vite, Tailwind CSS) | - Network Infrastructure (POS Systems, Cisco Meraki, CAT6) | -
+Post-Training AI Model Evaluation | - Data Compliance & Security (PII Protection, API Security) | - Motion & Graphic Design
+| - Audio Production & Sound Engineering | - Touch Typing (103 WPM)
+
+PROFESSIONAL EXPERIENCE
+Front-End Developer & Digital Administrator
+Scroggs Fencing | Sep 2024 - Present | Oklahoma City, OK
+- - Developed and deployed a secure, high-performance landing page using React, Vite, Tailwind CSS.
+- - Implemented automated CI/CD pipelines through GitHub Actions with secure API integrations.
+- - Managed encrypted secrets and API keys using GitHub's security features.
+- - Administered LinkedIn, Meta, and Email.js platforms, ensuring security best practices.
+- - Applied data compliance protocols to safeguard digital assets and optimize workflows.
+
+AI Writing Evaluator (Tier 3)
+Outlier | Feb 2023 - Present | Austin, TX (Remote)
+- - Conducted post-training AI model evaluations for Meta, OpenAI, and confidential clients.
+- - Assessed LLM-generated content for accuracy, coherence, and ethical compliance.
+- - Reviewed AI responses, ensuring alignment with policy guidelines and responsible AI practices.
+- - Evaluated AI vision capabilities, speech-to-text reformatting, and sensitive content moderation.
+
+Network Infrastructure Technician
+Ahu Consults | Feb 2022 - Feb 2023 | Austin, TX
+- - Specialized in low-voltage electrical work for restaurant POS system upgrades.
+- - Installed and configured Toast POS systems with Cisco Meraki Z4 routers.
+- - Implemented CAT6 network cabling following ANSI/TIA/EIA-568-B standards.
+- - Ensured compliance with industry specifications for optimal network performance.
+
+CERTIFICATIONS
+- Google Cybersecurity Specialization | - FreeCodeCamp Responsive Web Design | - FreeCodeCamp Data Structures &
+Algorithms | - FreeCodeCamp Front-End Development Libraries | - FreeCodeCamp Data Visualization with D3 | - Cisco
+Computer Hardware Basics | - FreeCodeCamp Relational Databases (In Progress) | - CompTIA Security+ (In Progress)
+
+EDUCATION
+The Culinary Institute of America
+San Antonio, TX | AAS in Culinary Arts & Restaurant Management | Sep 2013 - Oct 2015
+University of Central Florida
+Orlando, FL | AA, General Studies (Focus in Graphic Design) | Jul 2007 - Dec 2010`}</pre>
+                                    </div>
+                                </div>
+                                {!resumeMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'resume', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'resume', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'resume', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'resume', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'resume', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'resume', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'resume', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'resume', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Email Window */}
+                    {emailWindowOpen && !emailMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${emailMaximized ? 'maximized' : ''}`}
+                                style={!emailMaximized ? {
+                                    position: 'absolute',
+                                    left: emailPosition.x,
+                                    top: emailPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: emailSize.width,
+                                    height: emailSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'email')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/mail.ico" alt="" className="title-icon" />
+                                        <span>Contact Information</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleEmailMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleEmailMaximize}>
+                                            {emailMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleEmailClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <div className="dialog-message">
+                                        <p>Email Address:</p>
+                                        <p className="contact-email">evan.alexander.adamson@gmail.com</p>
+                                    </div>
+                                </div>
+                                {!emailMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'email', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'email', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'email', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'email', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'email', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'email', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'email', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'email', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* D3 Window */}
+                    {d3WindowOpen && !d3Minimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${d3Maximized ? 'maximized' : ''}`}
+                                style={!d3Maximized ? {
+                                    position: 'absolute',
+                                    left: d3Position.x,
+                                    top: d3Position.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: d3Size.width,
+                                    height: d3Size.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'd3')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/d3.ico" alt="" className="title-icon" />
+                                        <span>d3.exe</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleD3Minimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleD3Maximize}>
+                                            {d3Maximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleD3Close}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://evan-alexander-adamson.github.io/Bar-Chart/"
+                                        title="D3 Bar Chart"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!d3Maximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'd3', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'd3', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'd3', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'd3', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'd3', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'd3', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'd3', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'd3', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Work Window */}
+                    {workWindowOpen && !workMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${workMaximized ? 'maximized' : ''}`}
+                                style={!workMaximized ? {
+                                    position: 'absolute',
+                                    left: workPosition.x,
+                                    top: workPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: workSize.width,
+                                    height: workSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'work')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/internetExplorer.ico" alt="" className="title-icon" />
+                                        <span>Clients.html</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleWorkMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleWorkMaximize}>
+                                            {workMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleWorkClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://scroggsfencing.github.io/Homepage/"
+                                        title="Scroggs Fencing"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!workMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'work', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'work', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'work', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'work', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'work', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'work', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'work', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'work', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Type Test Window */}
+                    {typeTestWindowOpen && !typeTestMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${typeTestMaximized ? 'maximized' : ''}`}
+                                style={!typeTestMaximized ? {
+                                    position: 'absolute',
+                                    left: typeTestPosition.x,
+                                    top: typeTestPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: typeTestSize.width,
+                                    height: typeTestSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'typeTest')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/typeTest.ico" alt="" className="title-icon" />
+                                        <span>Type Test.exe</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleTypeTestMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleTypeTestMaximize}>
+                                            {typeTestMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleTypeTestClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://evan-alexander-adamson.github.io/WPM-tester/"
+                                        title="WPM Tester"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!typeTestMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'typeTest', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Sleep Calculator Window */}
+                    {sleepCalcWindowOpen && !sleepCalcMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${sleepCalcMaximized ? 'maximized' : ''}`}
+                                style={!sleepCalcMaximized ? {
+                                    position: 'absolute',
+                                    left: sleepCalcPosition.x,
+                                    top: sleepCalcPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: sleepCalcSize.width,
+                                    height: sleepCalcSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'sleepCalc')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/sleepCalculator.ico" alt="" className="title-icon" />
+                                        <span>Sleep Calculator.exe</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleSleepCalcMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleSleepCalcMaximize}>
+                                            {sleepCalcMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleSleepCalcClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://evan-alexander-adamson.github.io/sleep-calculator/"
+                                        title="Sleep Calculator"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!sleepCalcMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'sleepCalc', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Motion Design Window */}
+                    {motionDesignWindowOpen && !motionDesignMinimized && (
+                        <div className="program-window-overlay" style={{ background: 'transparent' }}>
+                            <div 
+                                className={`program-window animate-open ${motionDesignMaximized ? 'maximized' : ''}`}
+                                style={!motionDesignMaximized ? {
+                                    position: 'absolute',
+                                    left: motionDesignPosition.x,
+                                    top: motionDesignPosition.y,
+                                    margin: 0,
+                                    transform: 'none',
+                                    width: motionDesignSize.width,
+                                    height: motionDesignSize.height
+                                } : undefined}
+                            >
+                                <div 
+                                    className="window-header"
+                                    onMouseDown={(e) => handleDragStart(e, 'motionDesign')}
+                                >
+                                    <div className="window-title">
+                                        <img src="images/folder.ico" alt="" className="title-icon" />
+                                        <span>Motion Design.exe</span>
+                                    </div>
+                                    <div className="window-controls">
+                                        <button className="window-button minimize" onClick={handleMotionDesignMinimize}>_</button>
+                                        <button className="window-button maximize" onClick={handleMotionDesignMaximize}>
+                                            {motionDesignMaximized ? '❐' : '□'}
+                                        </button>
+                                        <button className="window-button close" onClick={handleMotionDesignClose}>×</button>
+                                    </div>
+                                </div>
+                                <div className="window-content">
+                                    <iframe 
+                                        src="https://evan-alexander-adamson.github.io/3d-Shader-Art/"
+                                        title="3D Shader Art"
+                                        className="program-iframe"
+                                    />
+                                </div>
+                                {!motionDesignMaximized && (
+                                    <React.Fragment>
+                                        <div className="resize-handle top" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'top')}></div>
+                                        <div className="resize-handle bottom" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'bottom')}></div>
+                                        <div className="resize-handle left" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'left')}></div>
+                                        <div className="resize-handle right" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'right')}></div>
+                                        <div className="resize-handle top-left" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'top-left')}></div>
+                                        <div className="resize-handle top-right" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'top-right')}></div>
+                                        <div className="resize-handle bottom-left" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'bottom-left')}></div>
+                                        <div className="resize-handle bottom-right" onMouseDown={(e) => handleResizeStart(e, 'motionDesign', 'bottom-right')}></div>
+                                    </React.Fragment>
+                                )}
+                            </div>
+                        </div>
+                    )}
+
+                    {/* Taskbar */}
+                    <div className="taskbar">
+                        <button className="start-button">
+                            <img src="images/start.ico" alt="Start" className="start-icon" />
+                            <span>Start</span>
+                        </button>
+                        <div className="taskbar-divider"></div>
+                        {musicWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!musicMinimized ? 'active' : ''}`}
+                                onClick={musicMinimized ? handleMusicRestore : handleMusicMinimize}
+                            >
+                                <img src="images/w98_keyboard_musical_midi.ico" alt="" className="taskbar-icon" />
+                                <span>Music.exe</span>
+                            </button>
+                        )}
+                        {resumeWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!resumeMinimized ? 'active' : ''}`}
+                                onClick={resumeMinimized ? handleResumeRestore : handleResumeMinimize}
+                            >
+                                <img src="images/notepad.ico" alt="" className="taskbar-icon" />
+                                <span>Resume.txt</span>
+                            </button>
+                        )}
+                        {d3WindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!d3Minimized ? 'active' : ''}`}
+                                onClick={d3Minimized ? handleD3Restore : handleD3Minimize}
+                            >
+                                <img src="images/d3.ico" alt="" className="taskbar-icon" />
+                                <span>d3.exe</span>
+                            </button>
+                        )}
+                        {emailWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!emailMinimized ? 'active' : ''}`}
+                                onClick={emailMinimized ? handleEmailRestore : handleEmailMinimize}
+                            >
+                                <img src="images/mail.ico" alt="" className="taskbar-icon" />
+                                <span>Email.exe</span>
+                            </button>
+                        )}
+                        {workWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!workMinimized ? 'active' : ''}`}
+                                onClick={workMinimized ? handleWorkRestore : handleWorkMinimize}
+                            >
+                                <img src="images/internetExplorer.ico" alt="" className="taskbar-icon" />
+                                <span>Clients.html</span>
+                            </button>
+                        )}
+                        {typeTestWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!typeTestMinimized ? 'active' : ''}`}
+                                onClick={typeTestMinimized ? handleTypeTestRestore : handleTypeTestMinimize}
+                            >
+                                <img src="images/typeTest.ico" alt="" className="taskbar-icon" />
+                                <span>Type Test.exe</span>
+                            </button>
+                        )}
+                        {sleepCalcWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!sleepCalcMinimized ? 'active' : ''}`}
+                                onClick={sleepCalcMinimized ? handleSleepCalcRestore : handleSleepCalcMinimize}
+                            >
+                                <img src="images/sleepCalculator.ico" alt="" className="taskbar-icon" />
+                                <span>Sleep Calculator.exe</span>
+                            </button>
+                        )}
+                        {motionDesignWindowOpen && (
+                            <button 
+                                className={`taskbar-button ${!motionDesignMinimized ? 'active' : ''}`}
+                                onClick={motionDesignMinimized ? handleMotionDesignRestore : handleMotionDesignMinimize}
+                            >
+                                <img src="images/folder.ico" alt="" className="taskbar-icon" />
+                                <span>Motion Design.exe</span>
+                            </button>
+                        )}
+                    </div>
+                </div>
+            );
+        };
+
+        // App Component
+        const App = () => <Desktop />;
+
+        // Render the app
+        const root = ReactDOM.createRoot(document.getElementById('root'));
+        root.render(<App />);
+    </script>
+</body>
+</html> 
