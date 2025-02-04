@@ -1,0 +1,38 @@
+/* /styles/globals.css */
+/* Reset and base styles */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Custom scrollbar for Windows 95 feel */
+::-webkit-scrollbar {
+    width: 16px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c0c0c0;
+    border: 1px solid #a0a0a0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #c0c0c0;
+    border: 1px outset #fff;
+}
+
+::-webkit-scrollbar-button {
+    background: #c0c0c0;
+    border: 1px outset #fff;
+    height: 16px;
+}
+
+/* Utility classes */
+.no-select {
+    user-select: none;
+} 
